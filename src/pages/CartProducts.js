@@ -59,7 +59,7 @@ const CartProducts = () => {
 
                     <IonButtons slot="end">
                         <IonBadge color="dark">
-                            { shopCart.length }
+                            { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }
                         </IonBadge>
 						<IonButton color="dark">
 							<IonIcon ref={ cartRef } className="animate__animated" icon={ cart } />
