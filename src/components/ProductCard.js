@@ -16,7 +16,7 @@ const ProductCard = props => {
 
     useEffect(() => {
 
-        const tempIsFavourite = favourites.find(f => f === `${ category.slug }/${ product.id }`);
+        const tempIsFavourite = favourites.find(f => category.slug === f.categorySlug && product.id === f.productID);
         setIsFavourite(tempIsFavourite ? true : false);
     }, [props.product, favourites]); 
 
