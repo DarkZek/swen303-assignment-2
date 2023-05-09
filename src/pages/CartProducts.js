@@ -101,7 +101,7 @@ const CartProducts = () => {
 
                                         <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="danger" onClick={ () => removeFromCart(index) }>-</IonButton>
 
-                                        <IonLabel className={ styles.productCostCounter, styles.price }>{ product.displayPrice }</IonLabel>
+                                        <IonLabel className={ styles.price }>{ product.displayPrice }</IonLabel>
                                     </IonRow>
                                 </IonCol>
                             );

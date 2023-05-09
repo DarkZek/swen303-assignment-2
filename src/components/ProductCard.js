@@ -1,7 +1,7 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon, IonRow, IonLabel } from "@ionic/react";
 import { arrowRedoOutline, cart, cartOutline, heart, heartOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
-import { addToCart } from "../data/CartStore";
+import { CartStore, addToCart } from "../data/CartStore";
 import { addToFavourites, FavouritesStore } from "../data/FavouritesStore";
 import styles from "./ProductCard.module.css";
 
@@ -13,12 +13,19 @@ const ProductCard = props => {
     const productCartRef = useRef();
     const productFavouriteRef = useRef();
     const [ isFavourite, setIsFavourite ] = useState(false);
+    const shopCart = CartStore.useState(s => s.product_ids);
+    const [ cartObject, setCartObject ] = useState(undefined);
 
     useEffect(() => {
 
         const tempIsFavourite = favourites.find(f => f === `${ category.slug }/${ product.id }`);
         setIsFavourite(tempIsFavourite ? true : false);
     }, [props.product, favourites]); 
+
+    useEffect(() => {
+        const cartObject = shopCart.find((v) => v.categorySlug === category.slug && v.productID === product.id)
+        setCartObject(cartObject);
+    }, [shopCart]); 
 
     function addProductToFavourites(e, categorySlug, productID) {
 
@@ -74,16 +81,24 @@ const ProductCard = props => {
                 </IonCardHeader>
 
                 <IonCardContent className={ styles.categoryCardContent }>
-                    
                     <div className={ styles.productPrice }>
+                        { cartObject !== undefined ? (
+                            <IonRow>
+                                <IonButton color="success" onClick={ e => addProductToCart(e, category.slug, product.id) } >
+                                { cartObject.count }
+                                </IonButton>
+                            </IonRow>
+                        ) : (
+                            <IonButton color="dark" onClick={ e => addProductToCart(e, category.slug, product.id) }>
+                                <IonIcon icon={ cartOutline } />
+                            </IonButton>
+                        )}
+                    
                         <IonButton style={{ width: "100%" }} color="light">
                             { product.price }
                         </IonButton>
-                        <IonButton color="dark" onClick={ e => addProductToCart(e, category.slug, product.id) }>
-                            <IonIcon icon={ cartOutline } />
-                        </IonButton>
 
-                        <IonIcon ref={ productCartRef } icon={ cart } color="dark" style={{ position: "absolute", display: "none", fontSize: "3rem" }} className="animate__animated" />
+                        <IonIcon ref={ productCartRef } icon={ cart } color="dark" style={{ position: "absolute", display: "none", fontSize: "3rem", 'pointer-events': 'none' }} className="animate__animated" />
                     </div>
                 </IonCardContent>
             </IonCard>
