@@ -1,7 +1,7 @@
 import { IonAvatar, IonBadge, IonButton, IonButtons, IonCardSubtitle, IonCol, IonContent, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import { cart, checkmarkSharp, chevronBackOutline, trashOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
-import { CartStore, removeFromCart } from "../data/CartStore";
+import { CartStore, removeFromCart, addToCart } from "../data/CartStore";
 import { ProductStore } from "../data/ProductStore";
 
 import styles from "./CartProducts.module.css";
@@ -26,13 +26,17 @@ const CartProducts = () => {
                 const tempCategory = products.filter(p => p.slug === product.categorySlug)[0];
                 const tempProduct = tempCategory.products.filter(p => parseInt(p.id) === parseInt(product.productID))[0];
 
-                const tempCartProduct = {
+                const unitCost = Number.parseFloat(tempProduct.price.substr(1));
+                const totalCost = (unitCost * product.count).toFixed(2);
 
+                const tempCartProduct = {
+                    count: product.count,
                     category: tempCategory,
-                    product: tempProduct
+                    product: tempProduct,
+                    displayPrice: tempProduct.price.substr(0,1) + totalCost
                 };
 
-                setTotal(prevTotal => prevTotal + parseInt(tempProduct.price.replace("£", "")));
+                setTotal(prevTotal => prevTotal + parseInt(tempProduct.price.replace("£", "")) * product.count);
                 setCartProducts(prevSearchResults => [ ...prevSearchResults, tempCartProduct ]);
             });
         }
@@ -79,28 +83,29 @@ const CartProducts = () => {
                     <IonList>
                         { cartProducts && cartProducts.map((product, index) => {
                             return (
-                            <IonItemSliding className={ styles.cartSlider }>
-                                <IonItem key={ index } lines="none" detail={ false } className={ styles.cartItem }>
+                                <IonCol>
+                                    <IonItem key={ index } lines="none" detail={ false } className={ styles.cartItem }>
+                                        <IonAvatar>
+                                            <IonImg src={ product.product.image } />
+                                        </IonAvatar>
+                                        <IonLabel className="ion-padding-start ion-text-wrap">
+                                            <p>{ product.category.name }</p>
+                                            <h4>{ product.product.name }</h4>
+                                        </IonLabel>
 
-                                    <IonAvatar>
-                                        <IonImg src={ product.product.image } />
-                                    </IonAvatar>
-                                    <IonLabel className="ion-padding-start ion-text-wrap">
-                                        <p>{ product.category.name }</p>
-                                        <h4>{ product.product.name }</h4>
-                                    </IonLabel>
+                                        <div className={ styles.cartActions }>
+                                            <IonBadge color="dark">{ product.displayPrice }</IonBadge>
+                                        </div>
+                                    </IonItem>
 
-                                    <div className={ styles.cartActions }>
-                                        <IonBadge color="dark">{ product.product.price }</IonBadge>
-                                    </div>
-                                </IonItem>
+                                    <IonRow>
+                                        <IonButton onClick={ () => addToCart(product.category.slug, product.product.id)} >+</IonButton>
 
-                                <IonItemOptions side="end">
-                                    <IonItemOption color="danger" style={{ paddingLeft: "1rem", paddingRight: "1rem" }} onClick={ () => removeProductFromCart(index) }>
-                                        <IonIcon icon={ trashOutline } />
-                                    </IonItemOption>
-                                </IonItemOptions>
-                            </IonItemSliding>
+                                        <IonLabel>{ product.count }</IonLabel>
+
+                                        <IonButton onClick={ () => removeFromCart(index) }>-</IonButton>
+                                    </IonRow>
+                                </IonCol>
                             );
                         })}
                     </IonList>
