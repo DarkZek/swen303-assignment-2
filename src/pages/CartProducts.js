@@ -1,4 +1,4 @@
-import { IonAvatar, IonBadge, IonButton, IonButtons, IonCardSubtitle, IonCol, IonContent, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonAvatar, IonBadge, IonButton, IonButtons, IonCardSubtitle, IonCol, IonContent, IonFabButton, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import { cart, checkmarkSharp, chevronBackOutline, trashOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { CartStore, removeFromCart, addToCart } from "../data/CartStore";
@@ -92,18 +92,16 @@ const CartProducts = () => {
                                             <p>{ product.category.name }</p>
                                             <h4>{ product.product.name }</h4>
                                         </IonLabel>
-
-                                        <div className={ styles.cartActions }>
-                                            <IonBadge color="dark">{ product.displayPrice }</IonBadge>
-                                        </div>
                                     </IonItem>
 
-                                    <IonRow>
-                                        <IonButton onClick={ () => addToCart(product.category.slug, product.product.id)} >+</IonButton>
+                                    <IonRow className={ styles.cartQuantity }>
+                                        <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="success" onClick={ () => addToCart(product.category.slug, product.product.id) }>+</IonButton>
+                                        
+                                        <IonLabel className={ styles.productCostCounter }>{ product.count }</IonLabel>
 
-                                        <IonLabel>{ product.count }</IonLabel>
+                                        <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="danger" onClick={ () => removeFromCart(index) }>-</IonButton>
 
-                                        <IonButton onClick={ () => removeFromCart(index) }>-</IonButton>
+                                        <IonLabel className={ styles.productCostCounter, styles.price }>{ product.displayPrice }</IonLabel>
                                     </IonRow>
                                 </IonCol>
                             );
