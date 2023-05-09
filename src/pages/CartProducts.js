@@ -95,11 +95,11 @@ const CartProducts = () => {
                                     </IonItem>
 
                                     <IonRow className={ styles.cartQuantity }>
-                                        <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="success" onClick={ () => addToCart(product.category.slug, product.product.id) }>+</IonButton>
+                                        <IonButton size="small" className={ styles.cartQuantityButton } shape="round" fill="solid" color="success" onClick={ () => addToCart(product.category.slug, product.product.id) }>+</IonButton>
                                         
                                         <IonLabel className={ styles.productCostCounter }>{ product.count }</IonLabel>
 
-                                        <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="danger" onClick={ () => removeFromCart(index) }>-</IonButton>
+                                        <IonButton size="small" className={ styles.cartQuantityButton } shape="round" fill="solid" color="danger" onClick={ () => removeFromCart(index) }>-</IonButton>
 
                                         <IonLabel className={ styles.price }>{ product.displayPrice }</IonLabel>
                                     </IonRow>

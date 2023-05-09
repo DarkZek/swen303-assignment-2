@@ -38,7 +38,7 @@ const Product = () => {
     useEffect(() => {
         const cartObject = shopCart.find((v) => v.categorySlug === category.slug && v.productID === product.id)
         setCartObject(cartObject);
-    }, [shopCart]); 
+    }, [shopCart, category.slug, product.id]); 
 
     useEffect(() => {
 
