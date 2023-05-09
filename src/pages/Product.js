@@ -1,9 +1,9 @@
-import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol, IonLabel, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router"
 import ProductCard from "../components/ProductCard";
-import { addToCart, CartStore } from "../data/CartStore";
+import { addToCart, CartStore, removeFromCart, removeFromCartByProductID } from "../data/CartStore";
 import { addToFavourites, FavouritesStore } from "../data/FavouritesStore";
 import { ProductStore } from "../data/ProductStore";
 
@@ -19,6 +19,7 @@ const Product = () => {
     const shopCart = CartStore.useState(s => s.product_ids);
     const [ product, setProduct ] = useState({});
     const [ category, setCategory ] = useState({});
+    const [ cartObject, setCartObject ] = useState(undefined);
 
     useEffect(() => {
 
@@ -33,6 +34,11 @@ const Product = () => {
         setCategory(tempCategory);
         setProduct(tempProduct);
     }, [ params.slug, params.id ]);
+
+    useEffect(() => {
+        const cartObject = shopCart.find((v) => v.categorySlug === category.slug && v.productID === product.id)
+        setCartObject(cartObject);
+    }, [shopCart]); 
 
     useEffect(() => {
 
@@ -111,12 +117,22 @@ const Product = () => {
                                 <IonCardContent className={ styles.categoryCardContent }>
                                     
                                     <div className={ styles.productPrice }>
-                                        <IonButton color="light" size="large">
+                                        { cartObject === undefined ? (
+                                            <IonButton size="large" color="dark" onClick={ e => addProductToCart(e, category.slug, product.id) }>
+                                                <IonIcon icon={ cartOutline } />&nbsp;&nbsp;Add to Cart
+                                            </IonButton>
+                                        ) : (
+                                            <IonRow>
+                                                <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="success" onClick={ () => addToCart(category.slug, product.id) }>+</IonButton>
+                                                
+                                                <IonLabel className={ styles.productCostCounter }>{ cartObject.count }</IonLabel>
+
+                                                <IonButton className={ styles.cartQuantityButton } shape="round" fill="solid" color="danger" onClick={ () => removeFromCartByProductID(product.id) }>-</IonButton>
+                                            </IonRow>
+                                        )}
+                                        <IonLabel className={ styles.priceLabel } size="large">
                                             { product.price }
-                                        </IonButton>
-                                        <IonButton size="large" color="dark" onClick={ e => addProductToCart(e, category.slug, product.id) }>
-                                            <IonIcon icon={ cartOutline } />&nbsp;&nbsp;Add to Cart
-                                        </IonButton>
+                                        </IonLabel>
 
                                         <IonIcon icon={ cart } color="dark" style={{ position: "absolute", display: "none", fontSize: "3rem" }} id={ `placeholder_cart_${ category.slug }_${ product.id }` } className="animate__animated" />
                                     </div>

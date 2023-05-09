@@ -45,6 +45,10 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+    background-color: #f8f8f8;
+    width: 100%;
+    padding-top: 4px !important;
+    justify-content: center;
 }
 
 .categoryCardContent ion-button {
@@ -63,4 +67,21 @@
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.productCostCounter {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px 0px 20px;
+}
+
+.cartQuantityButton {
+    width: 50px;
+}
+
+.priceLabel {
+    font-size: 16px;
+    padding-top: 12px;
+    padding-right: 10px;
 }

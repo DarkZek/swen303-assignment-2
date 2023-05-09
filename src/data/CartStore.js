@@ -27,7 +27,22 @@ export const addToCart = (categorySlug, productID) => {
 }
 
 export const removeFromCart = productIndex => {
+    console.log(productIndex);
     CartStore.update(s => { 
+        const items = s.product_ids[productIndex];
+
+        // Decrease items count, or remove item if none left
+        if (items.count > 1) {
+            items.count -= 1;
+        } else {
+            s.product_ids.splice(productIndex, 1);
+        }
+    });
+}
+
+export const removeFromCartByProductID = productId => {
+    CartStore.update(s => { 
+        const productIndex = s.product_ids.findIndex((v) => v.productID === productId);
         const items = s.product_ids[productIndex];
 
         // Decrease items count, or remove item if none left
