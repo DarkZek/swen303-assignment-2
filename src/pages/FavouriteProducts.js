@@ -85,13 +85,18 @@ const FavouriteProducts = () => {
 			
 			<IonContent fullscreen>
                 <IonGrid>
-
                     <IonRow className="ion-text-center">
                         <IonCol size="12">
                             <IonNote>{ searchResults && searchResults.length } { (searchResults.length > 1 || searchResults.length === 0) ? " favourites" : " favourite" } found</IonNote>
                         </IonCol>
                     </IonRow>
-
+                    <IonRow className="ion-text-center">
+                        <IonCol size="12">
+                            {
+                                searchResults.length === 0 && <IonTitle>There are no favourites added to the list currently. Use this page as a wishlist for items that have caught your eye for later!</IonTitle>
+                            }
+                        </IonCol>
+                    </IonRow>
                     <IonRow>
                         { searchResults && searchResults.map((product, index) => {
 
