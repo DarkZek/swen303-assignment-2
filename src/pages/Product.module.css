@@ -88,12 +88,11 @@
 
 .favouriteButton{
     font-size: 200% !important;
-    width: 24px !important;
-    height: 24px !important;
-}
+    font-size: 3.75em !important;;
 
+}
 .favouriteIcon{
     font-size: 200% !important;
-    width: 24px !important;
-    height: 24px !important;
+    font-size: 3.75em !important;;
+
 }

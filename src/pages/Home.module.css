@@ -30,12 +30,6 @@
     background-color: rgb(238, 238, 238);
 }
 
-.favouriteButton{
-    font-size: 200% !important;
-    width: 24px !important;
-    height: 24px !important;
-}
-
 .categoryCard img {
 
     /* border-radius: 5px; */
@@ -43,8 +37,13 @@
 }
 
 
+.favouriteButton{
+    font-size: 200% !important;
+    font-size: 3.75em !important;;
+
+}
 .favouriteIcon{
     font-size: 200% !important;
-    width: 24px !important;
-    height: 24px !important;
+    font-size: 3.75em !important;;
+
 }
