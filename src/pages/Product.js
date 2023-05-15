@@ -1,5 +1,5 @@
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol, IonLabel, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline } from "ionicons/icons";
+import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline,heartCircleOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router"
 import ProductCard from "../components/ProductCard";
@@ -92,7 +92,7 @@ const Product = () => {
                             { favourites.length }
                         </IonBadge>
 						<IonButton color="danger" size = "large" classname={styles.favouriteButton} routerLink="/favourites">
-							<IonIcon icon={ heart } size='large' className={ styles.favouriteIcon }/>
+							<IonIcon icon={ heartCircleOutline } size='large' className={ styles.favouriteIcon }/>
 						</IonButton>
                         <IonBadge color="dark">
                             { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }
