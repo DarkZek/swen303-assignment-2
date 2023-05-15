@@ -30,13 +30,21 @@
     background-color: rgb(238, 238, 238);
 }
 
-.categoryCardContent ion-card-subtitle {
-
-    /* color: rgb(78, 78, 78); */
+.favouriteButton{
+    font-size: 200% !important;
+    width: 24px !important;
+    height: 24px !important;
 }
 
 .categoryCard img {
 
     /* border-radius: 5px; */
     padding: 1rem;
+}
+
+
+.favouriteIcon{
+    font-size: 200% !important;
+    width: 24px !important;
+    height: 24px !important;
 }
