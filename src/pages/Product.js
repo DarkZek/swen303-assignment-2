@@ -91,8 +91,8 @@ const Product = () => {
                         <IonBadge color="danger">
                             { favourites.length }
                         </IonBadge>
-						<IonButton color="danger" routerLink="/favourites">
-							<IonIcon icon={ heart } />
+						<IonButton color="danger" size = "large" classname={styles.favouriteButton} routerLink="/favourites">
+							<IonIcon icon={ heart } size='large' className={ styles.favouriteIcon }/>
 						</IonButton>
                         <IonBadge color="dark">
                             { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }

@@ -8,3 +8,15 @@
     --background: rgb(240, 240, 240);
     --color: black;
 }
+
+.favouriteButton{
+    font-size: 200% !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.favouriteIcon{
+    font-size: 200% !important;
+    width: 24px !important;
+    height: 24px !important;
+}
