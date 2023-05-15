@@ -112,7 +112,7 @@ const Product = () => {
                             <IonCard className={ styles.categoryCard }>
                                 <IonCardHeader className={ styles.productCardHeader }>
                                     <div className={ styles.productCardActions }>
-                                        <IonIcon icon={ heartOutline } size="large" className={ styles.favouriteIcon } onClick={ e => addProductToFavourites(e, category.slug, product.id) }/>
+                                        <IonIcon icon={ heartOutline } size="large" className={ styles.favouriteIcon } onClick={ e => addProductToFavourites(e, category.slug, product.id) } icon={isFavourite ? heart : heartOutline} color={ isFavourite ? "danger" : "medium" }/>
                                         <IonIcon className={ styles.productCardAction }  color={ isFavourite ? "danger" : "medium" } />
                                         <IonIcon style={{ position: "absolute", display: "none" }} id={ `placeholder_favourite_product_${ category.slug }_${ product.id }` } className={ `${ styles.productCardAction } animate__animated` } />
                                     </div>
