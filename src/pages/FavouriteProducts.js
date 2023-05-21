@@ -1,4 +1,4 @@
-import { IonBadge, IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonCardSubtitle, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonBadge, IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonCardSubtitle, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonNote, IonPage, IonRow, IonTitle, IonToolbar, IonLabel } from "@ionic/react";
 import { cart, chevronBackOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "../components/ProductCard";
@@ -20,7 +20,6 @@ const FavouriteProducts = () => {
     const [amountLoaded, setAmountLoaded] = useState(6);
     
     var maxProd = 4
-
 
     useEffect(() => {
 
@@ -90,16 +89,15 @@ const FavouriteProducts = () => {
                             <IonNote>{ searchResults && searchResults.length } { (searchResults.length > 1 || searchResults.length === 0) ? " favourites" : " favourite" } found</IonNote>
                         </IonCol>
                     </IonRow>
-                    <IonRow className="ion-text-center">
+                    <IonRow className="ion-text-center ion-padding-top ion-padding-bottom">
                         <IonCol size="12">
                             {
-                                searchResults.length === 0 && <IonTitle>There are no favourites added to the list currently. Use this page as a wishlist for items that have caught your eye for later!</IonTitle>
+                                searchResults.length === 0 && <IonLabel>There are no favourites added to the list currently. Use this page as a wishlist for items that have caught your eye for later!</IonLabel>
                             }
                         </IonCol>
                     </IonRow>
                     <IonRow>
                         { searchResults && searchResults.map((product, index) => {
-
                             if ((index <= amountLoaded)) {
                                 return (
                                     <ProductCard key={ `category_product_${ index }`} product={ product.product } index={ index } cartRef={ cartRef } category={ product.category } />
@@ -117,17 +115,12 @@ const FavouriteProducts = () => {
                         {(category && category.products) && category.products.map((similar, index) => {
                             if (favouritesID.includes(similar.id)) {
                                 maxProd++;
-
                             }
 
-                           
-                            
                             if (!favouritesID.includes(similar.id) && (product.image && index < maxProd)) {
-                                                      return (
-
-                                        <ProductCard key={`similar_product_${index}`} product={similar} index={index} isFavourite={false} cartRef={cartRef} category={category} />
-                                    );
-                                
+                                return (
+                                    <ProductCard key={`similar_product_${index}`} product={similar} index={index} isFavourite={false} cartRef={cartRef} category={category} />
+                                );
                             }
                         })}
                     </IonRow>
