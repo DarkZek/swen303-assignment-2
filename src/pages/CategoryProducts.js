@@ -1,5 +1,5 @@
 import { IonBadge, IonButton, IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonNote, IonPage, IonRow, IonSearchbar, IonTitle, IonToolbar } from "@ionic/react";
-import { cart, chevronBackOutline, searchOutline, heart } from "ionicons/icons";
+import { cart, chevronBackOutline, searchOutline, heart, heartCircleOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router"
 import ProductCard from "../components/ProductCard";
@@ -65,8 +65,8 @@ const CategoryProducts = () => {
                         <IonBadge color="danger">
                             { favourites.length }
                         </IonBadge>
-						<IonButton color="danger" routerLink="/favourites">
-							<IonIcon icon={ heart } />
+						<IonButton color="danger" size="Large" className={ styles.favouriteButton } routerLink="/favourites">
+							<IonIcon icon={ heartCircleOutline }  size="large" className={ styles.favouriteIcon }/>
 						</IonButton>
                         <IonBadge color="dark">
                             { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 
 import styles from "./Home.module.css";
-import { cart, heart } from 'ionicons/icons';
+import { cart, heart,heartCircleOutline } from 'ionicons/icons';
 
 import { ProductStore } from '../data/ProductStore';
 import { FavouritesStore } from '../data/FavouritesStore';
@@ -28,8 +28,8 @@ const Home = () => {
 						<IonBadge color="danger">
                             { favourites.length }
                         </IonBadge>
-						<IonButton color="danger" routerLink="/favourites">
-							<IonIcon icon={ heart } />
+						<IonButton color="danger"  size = "large" classname={styles.favouriteButton} routerLink="/favourites">
+							<IonIcon icon={ heartCircleOutline }  size="large" className={ styles.favouriteIcon }/>
 						</IonButton>
 
 						<IonBadge color="dark">

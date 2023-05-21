@@ -54,6 +54,16 @@
     width: 50px;
 }
 
+.favouriteButton{
+    font-size: 200% !important;
+    font-size: 3.75em !important;;
+
+}
+.favouriteIcon{
+    font-size: 200% !important;
+    font-size: 3.75em !important;;
+}
+
 .price {
     flex-grow: 1;
     text-align: right;

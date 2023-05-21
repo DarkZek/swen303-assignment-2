@@ -1,5 +1,5 @@
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol, IonLabel, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline } from "ionicons/icons";
+import { arrowRedoOutline, cart, cartOutline, chevronBackOutline, heart, heartOutline,heartCircleOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router"
 import ProductCard from "../components/ProductCard";
@@ -91,8 +91,8 @@ const Product = () => {
                         <IonBadge color="danger">
                             { favourites.length }
                         </IonBadge>
-						<IonButton color="danger" routerLink="/favourites">
-							<IonIcon icon={ heart } />
+						<IonButton color="danger" size = "large" classname={styles.favouriteButton} routerLink="/favourites">
+							<IonIcon icon={ heartCircleOutline } size='large' className={ styles.favouriteIcon }/>
 						</IonButton>
                         <IonBadge color="dark">
                             { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }
@@ -112,9 +112,9 @@ const Product = () => {
                             <IonCard className={ styles.categoryCard }>
                                 <IonCardHeader className={ styles.productCardHeader }>
                                     <div className={ styles.productCardActions }>
-                                        <IonIcon className={ styles.productCardAction }  color={ isFavourite ? "danger" : "medium" } icon={ isFavourite ? heart : heartOutline } onClick={ e => addProductToFavourites(e, category.slug, product.id) } />
-                                        <IonIcon style={{ position: "absolute", display: "none" }} id={ `placeholder_favourite_product_${ category.slug }_${ product.id }` } className={ `${ styles.productCardAction } animate__animated` } color="danger" icon={ heart } />
-                                        <IonIcon className={ styles.productCardAction } size="medium" icon={ arrowRedoOutline } />
+                                        <IonIcon icon={ isFavourite ? heart : heartOutline} size="large" className={ styles.favouriteIcon } onClick={ e => addProductToFavourites(e, category.slug, product.id) } color={ isFavourite ? "danger" : "medium" }/>
+                                        <IonIcon className={ styles.productCardAction }  color={ isFavourite ? "danger" : "medium" } />
+                                        <IonIcon style={{ position: "absolute", display: "none" }} id={ `placeholder_favourite_product_${ category.slug }_${ product.id }` } className={ `${ styles.productCardAction } animate__animated` } />
                                     </div>
                                     <img src={ product.image } alt="product pic" />
                                     <p className="ion-text-wrap">{ product.name }</p>
