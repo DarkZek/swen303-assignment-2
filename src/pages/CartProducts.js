@@ -1,5 +1,5 @@
 import { IonAvatar, IonBadge, IonButton, IonButtons, IonCardSubtitle, IonCol, IonContent, IonFabButton, IonFooter, IonHeader, IonIcon, IonImg, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { cart, checkmarkSharp, chevronBackOutline, trashOutline, heart, cloud, heartCircleOutline } from "ionicons/icons";
+import { cart, checkmarkSharp, chevronBackOutline, trashOutline, heart, cloud, heartOutline } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { CartStore, removeFromCart, addToCart } from "../data/CartStore";
 import { ProductStore } from "../data/ProductStore";
@@ -66,8 +66,8 @@ const CartProducts = () => {
                         <IonBadge color="danger">
                             { favourites.length }
                         </IonBadge>
-						<IonButton size="Large"  className={ styles.favouriteButton } color="danger" routerLink="/favourites">
-                            <IonIcon icon={ heartCircleOutline } size="large" className={ styles.favouriteIcon } />
+						<IonButton size="default"  className={ styles.favouriteButton } color="danger" routerLink="/favourites">
+                            <IonIcon icon={ heartOutline } className={ styles.favouriteIcon } />
 						</IonButton>
                         <IonBadge color="dark">
                             { shopCart.reduce((counter, newVal) => counter += newVal.count, 0) }

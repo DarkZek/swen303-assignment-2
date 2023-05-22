@@ -108,7 +108,7 @@ const FavouriteProducts = () => {
 
                     <IonRow className="ion-text-center">
                         <IonCol size="12">
-                            <IonCardSubtitle>Today's popular products...</IonCardSubtitle>
+                            <IonCardSubtitle>{ category && category.products ? "Today's popular products..." : '' }</IonCardSubtitle>
                         </IonCol>
                     </IonRow>
                     <IonRow>
